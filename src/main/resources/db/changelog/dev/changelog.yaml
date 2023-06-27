@@ -7,3 +7,5 @@ databaseChangeLog:
     file: db/changelog/dev/changeset/3-drop-and-create-trigger-functions.sql
 - include:
     file: db/changelog/dev/changeset/4-drop-and-create-product-table.sql
+- include:
+    file: db/changelog/dev/changeset/5-insert-rows-into-product-table.sql
