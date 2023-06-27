@@ -1,4 +1,4 @@
--- changeset lukesukhanov:4
+-- changeset lukesukhanov:5
 
 SET search_path TO livestock_shop_dev;
 
@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS product CASCADE;
 CREATE TABLE product (
 	id bigint NOT NULL PRIMARY KEY DEFAULT nextval('common_id_seq'),
 	product_name varchar NOT NULL,
-	category varchar NOT NULL,
+	category_id integer NOT NULL REFERENCES category(id),
 	description varchar,
 	quantity integer NOT NULL CHECK(quantity >= 0),
 	price numeric NOT NULL CHECK(price > 0),
