@@ -10,8 +10,10 @@ databaseChangeLog:
 - include:
     file: db/changelog/dev/changeset/5-drop-and-create-product-table.sql
 - include:
-    file: db/changelog/dev/changeset/6-insert-categories.sql
+    file: db/changelog/dev/changeset/6-drop-and-create-product-image-table.sql
 - include:
-    file: db/changelog/dev/changeset/7-insert-products.sql
+    file: db/changelog/dev/changeset/7-insert-categories.sql
 - include:
-    file: db/changelog/dev/changeset/8-drop-and-create-index-on-category-id-column.sql
+    file: db/changelog/dev/changeset/8-insert-products.sql
+- include:
+    file: db/changelog/dev/changeset/9-drop-and-create-index-on-category-id-column.sql

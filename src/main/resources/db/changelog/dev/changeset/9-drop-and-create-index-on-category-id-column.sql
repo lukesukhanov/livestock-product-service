@@ -1,4 +1,4 @@
--- changeset lukesukhanov:8
+-- changeset lukesukhanov:9
 
 SET search_path TO livestock_shop_dev;
 

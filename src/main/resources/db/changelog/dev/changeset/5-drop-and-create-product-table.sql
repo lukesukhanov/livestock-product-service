@@ -7,12 +7,11 @@ DROP TABLE IF EXISTS product CASCADE;
 CREATE TABLE product (
 	id bigint NOT NULL PRIMARY KEY DEFAULT nextval('common_id_seq'),
 	product_name varchar NOT NULL,
-	category_id integer NOT NULL REFERENCES category(id),
+	category_id bigint NOT NULL REFERENCES category(id),
 	description varchar,
 	quantity integer NOT NULL CHECK(quantity >= 0),
 	price numeric NOT NULL CHECK(price > 0),
 	currency varchar(3) NOT NULL,
-	image bytea,
 	created_at timestamp with time zone,
 	last_modified_at timestamp with time zone
 );

@@ -5,7 +5,7 @@ SET search_path TO livestock_shop_dev;
 -- 'category' table
 DROP TABLE IF EXISTS category CASCADE;
 CREATE TABLE category (
-	id integer NOT NULL PRIMARY KEY DEFAULT nextval('common_id_seq'),
+	id bigint NOT NULL PRIMARY KEY DEFAULT nextval('common_id_seq'),
 	category_name varchar NOT NULL UNIQUE,
 	created_at timestamp with time zone,
 	last_modified_at timestamp with time zone
