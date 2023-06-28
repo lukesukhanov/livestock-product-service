@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.livestockshop.productservice.dto.Product;
+import com.livestockshop.productservice.model.dto.ProductForRead;
+import com.livestockshop.productservice.model.entity.ProductEntity;
 import com.livestockshop.productservice.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,20 +22,19 @@ import lombok.RequiredArgsConstructor;
  * <p>
  * The JSON format is used for the response body.
  * 
- * @author Luke Sukhanov
- * @version 1.0
- * @see Product
+ * @see ProductEntity
  * @see ProductService
  */
 @RestController
-@RequestMapping(path = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/products",
+    produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class ProductController {
 
   private final ProductService productService;
 
   /**
-   * Finds products using paging and filtering.
+   * Finds products using filtering and paging.
    * <p>
    * Serves the {@code GET} requests for the {@code /products} endpoint.
    * <p>
@@ -47,15 +47,17 @@ public class ProductController {
    * <i>Normal response</i>
    * <p>
    * Status: 200<br />
-   * Body: [{id: 1, productName: "Овцы бараны", category: "Овцы", description: "Продаю баранов и овец"}, ... ]
+   * Body: [{id: 1, productName: "Овцы бараны", category: "Овцы", description:
+   * "Продаю баранов и овец", quantity: 57, price: 10500, currency: "RUB",
+   * idsOfImages: [1, 2]}, ...]
    * 
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
-   *         containing all the players found
+   *         containing all the players found using filtering and paging
    */
   @GetMapping
-  public ResponseEntity<List<Product>> getPagedAndFiltered(
+  public ResponseEntity<List<ProductForRead>> getPagedAndFiltered(
       @RequestParam("category") String category) {
-    List<Product> products = this.productService.getPagedAndFiltered(category);
+    List<ProductForRead> products = this.productService.getFilteredAndPaged(category);
     return ResponseEntity.ok(products);
   }
 }

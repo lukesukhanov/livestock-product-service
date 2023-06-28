@@ -1,1 +1,0 @@
-package com.livestockshop.productservice.entity;
