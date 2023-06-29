@@ -71,7 +71,7 @@ class CategoryEntityTest {
 
   @Test
   @DisplayName("hashCode() - any other CategoryEntity")
-  final void hashCode_anyOtherPlayerEntity() throws Exception {
+  final void hashCode_anyOtherCategoryEntity() throws Exception {
     CategoryEntity category1 = new CategoryEntity();
     category1.setId(1L);
     category1.setCategoryName("name1");

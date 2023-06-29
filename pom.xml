@@ -118,6 +118,7 @@
 						<configuration>
 							<failOnError>true</failOnError>
 							<enableDirtyTracking>true</enableDirtyTracking>
+							<enableLazyInitialization>true</enableLazyInitialization>
 						</configuration>
 						<goals>
 							<goal>enhance</goal>
