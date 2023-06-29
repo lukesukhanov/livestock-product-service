@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -23,10 +24,13 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "CATEGORY")
+@NamedQuery(name = "find_all_category_names", query = "select categoryName from CategoryEntity")
 @NoArgsConstructor
 @Getter
 @Setter
 public class CategoryEntity {
+
+  public static final String JPQL_FIND_ALL_CATEGORY_NAMES = "find_all_category_names";
 
   @Id
   @GeneratedValue(generator = "common_id_seq")
