@@ -6,10 +6,10 @@ SET search_path TO livestock_shop_dev;
 DROP TABLE IF EXISTS product_image CASCADE;
 CREATE TABLE product_image (
 	id bigint NOT NULL PRIMARY KEY DEFAULT nextval('common_id_seq'),
-	product_id bigint NOT NULL REFERENCES product(id),
 	image bytea NOT NULL,
 	created_at timestamp with time zone,
-	last_modified_at timestamp with time zone
+	last_modified_at timestamp with time zone,
+	product_id bigint NOT NULL REFERENCES product(id) ON DELETE CASCADE
 );
 -- rollback DROP TABLE IF EXISTS product_image CASCADE;
 
