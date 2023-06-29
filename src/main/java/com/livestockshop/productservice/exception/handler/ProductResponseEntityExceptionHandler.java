@@ -41,7 +41,7 @@ public class ProductResponseEntityExceptionHandler extends ResponseEntityExcepti
    * @return a {@code ResponseEntity} with the problem details
    */
   @ExceptionHandler(ConstraintViolationException.class)
-  public ResponseEntity<Object> handleNotFoundException(ConstraintViolationException e,
+  public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException e,
       WebRequest request) {
     log.debug("Handling {}", e.toString());
     List<Map<String, ?>> invalidParams = new ArrayList<>(2);
@@ -75,6 +75,7 @@ public class ProductResponseEntityExceptionHandler extends ResponseEntityExcepti
         "property", e.getPropertyName(),
         "requiredType", e.getRequiredType(),
         "value", e.getValue());
+    headers.setContentType(MediaType.APPLICATION_PROBLEM_JSON);
     return handleExceptionInternal(e, responseBody, headers, HttpStatus.BAD_REQUEST, request);
   }
 
