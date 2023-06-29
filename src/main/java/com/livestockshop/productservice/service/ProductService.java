@@ -1,8 +1,7 @@
 package com.livestockshop.productservice.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
-import com.livestockshop.productservice.model.dto.ProductForRead;
 import com.livestockshop.productservice.model.entity.ProductEntity;
 
 /**
@@ -13,10 +12,15 @@ import com.livestockshop.productservice.model.entity.ProductEntity;
 public interface ProductService {
 
   /**
-   * Finds products using filtering and paging.
+   * Finds products using paging and filtering.
    * 
    * @param categoryName a {@code String} with the category name
-   * @return a {@code List} of products found using filtering and paging
+   * @return a {@code List} of products found using paging and filtering
    */
-  List<ProductForRead> getFilteredAndPaged(String categoryName);
+  Page<ProductEntity> getWithPagingAndFiltering(
+      Integer page,
+      Integer size,
+      String category,
+      Double minPrice,
+      Double maxPrice);
 }

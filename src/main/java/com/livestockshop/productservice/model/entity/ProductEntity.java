@@ -1,14 +1,15 @@
 package com.livestockshop.productservice.model.entity;
 
-import java.util.Set;
+import java.util.Map;
+import java.util.Objects;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.livestockshop.productservice.repository.ProductRepository;
 
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -40,17 +41,14 @@ import lombok.Setter;
 @Table(name = "PRODUCT")
 @DynamicUpdate
 @NamedEntityGraph(
-    name = "product.withCategory.withIdsOfImages",
-    attributeNodes = {
-        @NamedAttributeNode(value = ProductEntity_.CATEGORY),
-        @NamedAttributeNode(value = ProductEntity_.IDS_OF_IMAGES)
-    })
+    name = "product.withCategory",
+    attributeNodes = @NamedAttributeNode(value = ProductEntity_.CATEGORY))
 @NoArgsConstructor
 @Getter
 @Setter
 public class ProductEntity {
 
-  public static final String ENTITY_GRAPH_WITH_CATEGORY_AND_IDS_OF_IMAGES = "product.withCategory.withIdsOfImages";
+  public static final String ENTITY_GRAPH_WITH_CATEGORY = "product.withCategory";
 
   @Id
   @GeneratedValue(generator = "common_id_seq")
@@ -75,12 +73,8 @@ public class ProductEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "CATEGORY_ID")
+  @JsonIgnore
   private CategoryEntity category;
-
-  @ElementCollection
-  @CollectionTable(name = "PRODUCT_IMAGE", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
-  @Column(name = "ID")
-  private Set<Long> idsOfImages;
 
   @Override
   public int hashCode() {
@@ -97,5 +91,10 @@ public class ProductEntity {
     }
     ProductEntity other = (ProductEntity) o;
     return this.id != null && this.id.equals(other.getId());
+  }
+
+  @JsonAnyGetter
+  private Map<String, String> addJsonProperties() {
+    return Map.of("category", Objects.toString(this.category.getCategoryName()));
   }
 }

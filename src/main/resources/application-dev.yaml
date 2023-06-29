@@ -46,3 +46,12 @@ spring:
     drop-first: true
 logging:
   config: classpath:logback-dev.xml
+springdoc:
+  enabled: true
+  swagger-ui:
+    enabled: true
+    url: openapi.yaml
+    tryItOutEnabled: true
+    operationsSorter: method
+    disable-swagger-default-url: true
+    use-root-path: true
