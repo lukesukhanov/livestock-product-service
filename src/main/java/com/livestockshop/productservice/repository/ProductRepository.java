@@ -20,7 +20,7 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductEnt
   /**
    * Finds products using paging and filtering.
    * <p>
-   * The products are fetched with category names and ids of their images.
+   * Products are fetched with category names.
    * 
    * @param spec a {@code Specification} for filtering products
    * @return a {@code List} of products after paging and filtering

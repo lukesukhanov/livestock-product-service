@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
  * The JSON format is used for the response body.
  * 
  * @see ProductImageService
- * @see ProductImageExceptionHandler
+ * @see GeneralResponseEntityExceptionHandler
  */
 @RestController
 @RequestMapping(path = "/productImages")

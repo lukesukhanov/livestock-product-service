@@ -123,6 +123,24 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/ProductImageNotFoundProblem'
+  /categories:
+    get:
+      tags:
+      - Product categories
+      summary: Finds all category names
+      responses:
+        200:
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - Овцы
+                  - Коровы
+                  - Свиньи
 components:
   schemas:
     Product:
