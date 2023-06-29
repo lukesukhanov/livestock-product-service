@@ -1,4 +1,4 @@
-package com.livestockshop.productservice.exception.handler;
+package com.livestockshop.productservice.exception;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,40 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GeneralResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-  /**
-   * Handles the {@code ConstraintViolationException} which may be thrown in
-   * case of invalid request parameters.
-   * 
-   * @param e the catched {@code ConstraintViolationException}
-   * @param request the current {@code WebRequest}
-   * @return a {@code ResponseEntity} with the problem details
-   */
-  @ExceptionHandler(ConstraintViolationException.class)
-  public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException e,
-      WebRequest request) {
-    log.debug("Handling {}", e.toString());
-    List<Map<String, ?>> invalidParams = new ArrayList<>(2);
-    for (ConstraintViolation<?> invalidParam : e.getConstraintViolations()) {
-      String paramPath = invalidParam.getPropertyPath().toString();
-      String paramName = paramPath.substring(paramPath.lastIndexOf(".") + 1);
-      invalidParams.add(Map.of(
-          "name", paramName,
-          "reason", invalidParam.getMessage()));
-    }
-    Map<String, ?> responseBody = Map.of(
-        "type", request.getContextPath() + "/probs/invalidRequestParameters",
-        "title", "Invalid request parameters",
-        "status", "400",
-        "detail", e.getMessage(),
-        "invalid-params", invalidParams);
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_PROBLEM_JSON);
-    return handleExceptionInternal(e, responseBody, headers, HttpStatus.BAD_REQUEST, request);
-  }
-
   @Override
   protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException e, HttpHeaders headers,
       HttpStatusCode status, WebRequest request) {
+
     log.debug("Handling {}", e.toString());
     Map<String, ?> responseBody = Map.of(
         "type", request.getContextPath() + "/probs/requestPropertyTypeMismatch",
@@ -73,4 +43,54 @@ public class GeneralResponseEntityExceptionHandler extends ResponseEntityExcepti
     return handleExceptionInternal(e, responseBody, headers, HttpStatus.BAD_REQUEST, request);
   }
 
+  /**
+   * Handles the {@code ConstraintViolationException} which may be thrown in
+   * case of invalid request parameters.
+   * 
+   * @param e the catched {@code ConstraintViolationException}
+   * @param request the current {@code WebRequest}
+   * @return a {@code ResponseEntity} with the problem details
+   */
+  @ExceptionHandler(ConstraintViolationException.class)
+  private ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException e,
+      WebRequest request) {
+
+    log.debug("Handling {}", e.toString());
+    List<Map<String, ?>> invalidParams = new ArrayList<>(2);
+    for (ConstraintViolation<?> invalidParam : e.getConstraintViolations()) {
+      String paramPath = invalidParam.getPropertyPath().toString();
+      String paramName = paramPath.substring(paramPath.lastIndexOf(".") + 1);
+      invalidParams.add(Map.of(
+          "name", paramName,
+          "reason", invalidParam.getMessage()));
+    }
+    Map<String, ?> responseBody = Map.of(
+        "type", request.getContextPath() + "/probs/invalidRequestParameters",
+        "title", "Invalid request parameters",
+        "status", "400",
+        "invalid-params", invalidParams);
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_PROBLEM_JSON);
+    return handleExceptionInternal(e, responseBody, headers, HttpStatus.BAD_REQUEST, request);
+  }
+
+  /**
+   * Handles the {@code NotFoundException} which may be thrown in case a
+   * resource wasn't found.
+   * 
+   * @param e the catched {@code NotFoundException}
+   * @param request the current {@code WebRequest}
+   * @return a {@code ResponseEntity} with the problem details
+   */
+  @ExceptionHandler(NotFoundException.class)
+  private ResponseEntity<Object> handleNotFoundException(NotFoundException e, WebRequest request) {
+    log.debug("Handling {}", e.toString());
+    Map<String, ?> responseBody = Map.of(
+        "type", request.getContextPath() + "/probs/resourceNotFound",
+        "title", e.getMessage(),
+        "status", "404");
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_PROBLEM_JSON);
+    return handleExceptionInternal(e, responseBody, headers, HttpStatus.NOT_FOUND, request);
+  }
 }

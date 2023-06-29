@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -45,5 +46,16 @@ class DefaultProductImageServiceTest {
         .thenReturn(this.existingIdsOfImagesForOneProduct);
     List<Long> result = this.productImageService.getIdsOfImagesByProductId(productId);
     assertEquals(result, this.existingIdsOfImagesForOneProduct);
+  }
+
+  @Test
+  @DisplayName("getImageById(Long) - normal return")
+  final void getImageById_normalReturn() throws Exception {
+    Long id = 1L;
+    byte[] existingImage = { 1, 2, 3 };
+    when(this.productImageRepository.findImageById(id))
+        .thenReturn(Optional.of(existingImage));
+    byte[] result = this.productImageService.getImageById(id);
+    assertEquals(result, existingImage);
   }
 }

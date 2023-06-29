@@ -63,4 +63,19 @@ class ProductImageControllerTest {
             content().contentType(MediaType.APPLICATION_JSON),
             content().string(this.objectMapper.writeValueAsString(responseBody)));
   }
+
+  @Test
+  @DisplayName("getImageById(Long) - normal return")
+  final void getImageById_normalReturn() throws Exception {
+    Long id = 1L;
+    byte[] existingImage = { 1, 2, 3 };
+    when(this.productImageService.getImageById(id))
+        .thenReturn(existingImage);
+    this.mockMvc.perform(get("/productImages/" + id)
+        .accept(MediaType.IMAGE_JPEG))
+        .andExpectAll(
+            status().isOk(),
+            content().contentType(MediaType.IMAGE_JPEG),
+            content().bytes(existingImage));
+  }
 }

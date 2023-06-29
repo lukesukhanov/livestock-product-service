@@ -66,6 +66,22 @@ public class ProductController {
    * totalPages: 2, content: [{id: 1, productName: "Овцы бараны", description:
    * "Продаю баранов и овец", quantity: 57, price: 9500, currency: "RUB",
    * category: "Овцы"}, ...]}
+   * <p>
+   * <i>Response in case of invalid request parameters</i>
+   * <p>
+   * Status: 400<br />
+   * Body: {type: "/probs/invalidRequestParameters", title: "Invalid request
+   * parameters", status: 400, invalid-params: [{"name": "page", "reason": "Page
+   * ordinal must be greater than or equal to 0"}]}
+   * <p>
+   * <i>Response in case request parameter has invalid type</i>
+   * <p>
+   * Status: 400<br />
+   * Body: {type: "/probs/requestPropertyTypeMismatch", title: "Request property
+   * type mismatch", status: 400, detail: "Failed to convert value of type
+   * 'java.lang.String' to required type 'java.lang.Integer'; For input string:
+   * \"1.1\"", property: "page", requiredType: "java.lang.Integer", value:
+   * "1.1"}
    * 
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
    *         containing all the players found using paging and filtering

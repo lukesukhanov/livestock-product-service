@@ -57,6 +57,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductsPage'
+        400:
+          description: Response in case of invalid request parameters
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestParametersProblem'
   /productImages:
     get:
       tags:
@@ -77,6 +83,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IdsOfImagesForOneProduct'
+        400:
+          description: Response in case request parameter has invalid type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/RequestParameterHasInvalidTypeProblem'
+  /productImages/{id}:
+    get:
+      tags:
+      - Product images
+      summary: Finds an image by id
+      parameters:
+      - in: path
+        name: id
+        description: Id of the image
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: Normal response
+          content:
+            image/jpeg:
+              schema:
+                type: array
+                items:
+                  type: integer
+        400:
+          description: Response in case the path variable has invalid type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/RequestParameterHasInvalidTypeProblem'
+        404:
+          description: Response in case an image wasn't found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProductImageNotFoundProblem'
 components:
   schemas:
     Product:
@@ -143,3 +189,69 @@ components:
           - 1
           - 2
           - 3
+    InvalidRequestParametersProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: /probs/invalidRequestParameters
+        title:
+          type: string
+          example: Invalid request parameters
+        status:
+          type: integer
+          format: int32
+          example: 400
+        invalid-params:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvalidRequestParameter'
+    InvalidRequestParameter:
+      type: object
+      properties:
+        name:
+          type: string
+          example: page
+        reason:
+          type: string
+          example: Page ordinal must be greater than or equal to 0
+    RequestParameterHasInvalidTypeProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: /probs/requestPropertyTypeMismatch
+        title:
+          type: string
+          example: Request property type mismatch
+        status:
+          type: integer
+          format: int32
+          example: 400
+        details:
+          type: string
+          example: |-
+            Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer';
+            For input string: "1.1"
+        property:
+          type: string
+          example: page
+        requiredType:
+          type: string
+          example: java.lang.Integer
+        value:
+          type: string
+          example: 1.1
+    ProductImageNotFoundProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: /probs/resourceNotFound
+        title:
+          type: string
+          example: Can't find a product image with id 1
+        status:
+          type: integer
+          format: int32
+          example: 404

@@ -1,7 +1,5 @@
 package com.livestockshop.productservice.model.entity;
 
-import java.sql.Blob;
-
 import com.livestockshop.productservice.repository.ProductImageRepository;
 
 import jakarta.persistence.Basic;
@@ -11,7 +9,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
@@ -43,6 +40,8 @@ import lombok.Setter;
     attributeNodes = @NamedAttributeNode(value = ProductImageEntity_.IMAGE))
 @NamedQuery(name = "find_ids_of_images_by_product_id",
     query = "select id from ProductImageEntity where product.id = :productId")
+@NamedQuery(name = "find_image_by_id",
+    query = "select image from ProductImageEntity where id = :id")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -51,6 +50,7 @@ public class ProductImageEntity {
   public static final String ENTITY_GRAPH_WITH_IMAGE = "productImage.withImage";
 
   public static final String JPQL_FIND_IDS_OF_IMAGES_BY_PRODUCT_ID = "find_ids_of_images_by_product_id";
+  public static final String JPQL_FIND_IMAGE_BY_ID = "find_image_by_id";
 
   @Id
   @GeneratedValue(generator = "common_id_seq")
@@ -58,10 +58,9 @@ public class ProductImageEntity {
   @Column(name = "ID", updatable = false)
   private Long id;
 
-  @Lob
   @Basic(fetch = FetchType.LAZY)
   @Column(name = "IMAGE")
-  private Blob image;
+  private byte[] image;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "PRODUCT_ID")

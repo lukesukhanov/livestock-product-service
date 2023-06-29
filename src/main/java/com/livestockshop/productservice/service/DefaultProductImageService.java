@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.livestockshop.productservice.exception.ProductImageNotFoundException;
 import com.livestockshop.productservice.repository.ProductImageRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -24,4 +25,10 @@ public class DefaultProductImageService implements ProductImageService {
     return this.productImageRepository.findIdsOfImagesByProductId(productId);
   }
 
+  @Transactional(readOnly = true)
+  @Override
+  public byte[] getImageById(Long id) {
+    return this.productImageRepository.findImageById(id)
+        .orElseThrow(() -> new ProductImageNotFoundException(id));
+  }
 }
