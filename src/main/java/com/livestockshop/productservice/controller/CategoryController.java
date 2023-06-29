@@ -1,7 +1,5 @@
 package com.livestockshop.productservice.controller;
 
-import java.util.List;
-
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +29,7 @@ public class CategoryController {
   private final CategoryService categoryService;
 
   /**
-   * Finds all category names.
+   * Finds all product categories.
    * <p>
    * Serves the {@code GET} requests for the {@code /categories} endpoint.
    * <p>
@@ -44,14 +42,13 @@ public class CategoryController {
    * <i>Normal response</i>
    * <p>
    * Status: 200<br />
-   * Body: ["Овцы", "Коровы", "Свиньи"]
+   * Body: [{id: 1, categoryName: "Овцы"}, {id: 1, categoryName: "Коровы"}]
    * 
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
-   *         containing all existing category names
+   *         containing all existing product categories
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> getAllCategoryNames() {
-    List<String> responseBody = this.categoryService.getAllCategoryNames();
-    return ResponseEntity.ok(responseBody);
+  public ResponseEntity<?> getAll() {
+    return ResponseEntity.ok(this.categoryService.getAll());
   }
 }

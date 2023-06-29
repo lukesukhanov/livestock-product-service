@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.livestockshop.productservice.LivestockShopProductServiceApplication;
+import com.livestockshop.productservice.model.entity.CategoryEntity;
 import com.livestockshop.productservice.repository.CategoryRepository;
 
 @SpringBootTest(classes = LivestockShopProductServiceApplication.class)
@@ -27,14 +28,14 @@ class DefaultCategoryServiceTest {
   @Autowired
   private DefaultCategoryService categoryService;
 
-  private final List<String> existingCategoryNames = List.of("Овцы", "Коровы", "Свиньи");
+  private final List<CategoryEntity> existingCategories = List.of(new CategoryEntity());
 
   @Test
   @DisplayName("getAllCategoryNames(...) - normal return")
   final void getAllCategoryNames_normalReturn() throws Exception {
-    when(this.categoryRepository.findAllCategoryNames())
-        .thenReturn(this.existingCategoryNames);
-    List<String> result = this.categoryService.getAllCategoryNames();
-    assertEquals(result, this.existingCategoryNames);
+    when(this.categoryRepository.findAll())
+        .thenReturn(this.existingCategories);
+    List<CategoryEntity> result = this.categoryService.getAll();
+    assertEquals(result, this.existingCategories);
   }
 }

@@ -20,7 +20,7 @@ public interface ProductService {
   Page<ProductEntity> getWithPagingAndFiltering(
       Integer page,
       Integer size,
-      String category,
+      Long categoryId,
       Double minPrice,
       Double maxPrice);
 }

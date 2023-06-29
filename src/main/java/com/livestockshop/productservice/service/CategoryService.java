@@ -12,9 +12,9 @@ import com.livestockshop.productservice.model.entity.CategoryEntity;
 public interface CategoryService {
 
   /**
-   * Finds all category names.
+   * Finds all categories.
    * 
-   * @return a {@code List} of category names
+   * @return a {@code List} of all existing categories
    */
-  List<String> getAllCategoryNames();
+  List<CategoryEntity> getAll();
 }

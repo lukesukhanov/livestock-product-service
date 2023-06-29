@@ -16,14 +16,14 @@ import com.livestockshop.productservice.repository.ProductRepository;
 public class ProductSpecification {
 
   /**
-   * Filters products by category name.
+   * Filters products by category id.
    * 
-   * @param categoryName a {@code String} with the category name
-   * @return a {@code Specification} filtering products by category name.
+   * @param categoryId a {@code Long} representing the category id
+   * @return a {@code Specification} filtering products by category id
    */
-  public static Specification<ProductEntity> byCategoryName(String categoryName) {
+  public static Specification<ProductEntity> byCategoryId(Long categoryId) {
     return (root, query, builder) -> builder
-        .equal(root.get(ProductEntity_.category).get(CategoryEntity_.categoryName), categoryName);
+        .equal(root.get(ProductEntity_.category).get(CategoryEntity_.id), categoryId);
   }
 
   /**

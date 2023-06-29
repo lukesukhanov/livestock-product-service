@@ -71,7 +71,7 @@ public class ProductEntity {
   @Column(name = "CURRENCY")
   private String currency;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "CATEGORY_ID")
   @JsonIgnore
   private CategoryEntity category;

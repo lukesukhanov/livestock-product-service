@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.livestockshop.productservice.model.entity.CategoryEntity;
 import com.livestockshop.productservice.repository.CategoryRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class DefaultCategoryService implements CategoryService {
 
   @Transactional(readOnly = true)
   @Override
-  public List<String> getAllCategoryNames() {
-    return this.categoryRepository.findAllCategoryNames();
+  public List<CategoryEntity> getAll() {
+    return this.categoryRepository.findAll();
   }
 }

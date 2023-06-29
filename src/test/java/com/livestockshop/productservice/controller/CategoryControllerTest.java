@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.livestockshop.productservice.LivestockShopProductServiceApplication;
+import com.livestockshop.productservice.model.entity.CategoryEntity;
 import com.livestockshop.productservice.service.CategoryService;
 
 @SpringBootTest(classes = LivestockShopProductServiceApplication.class)
@@ -37,18 +38,18 @@ class CategoryControllerTest {
   @Autowired
   private ObjectMapper objectMapper;
 
-  private final List<String> existingCategoryNames = List.of("Овцы", "Коровы", "Свиньи");
+  private final List<CategoryEntity> existingCategories = List.of(new CategoryEntity());
 
   @Test
   @DisplayName("getAllCategoryNames(...) - normal return")
   final void getAllCategoryNames_normalReturn() throws Exception {
-    when(this.categoryService.getAllCategoryNames())
-        .thenReturn(this.existingCategoryNames);
+    when(this.categoryService.getAll())
+        .thenReturn(this.existingCategories);
     this.mockMvc.perform(get("/categories")
         .accept(MediaType.APPLICATION_JSON))
         .andExpectAll(
             status().isOk(),
             content().contentType(MediaType.APPLICATION_JSON),
-            content().bytes(this.objectMapper.writeValueAsBytes(this.existingCategoryNames)));
+            content().bytes(this.objectMapper.writeValueAsBytes(this.existingCategories)));
   }
 }

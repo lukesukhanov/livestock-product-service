@@ -2,7 +2,6 @@ package com.livestockshop.productservice.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.livestockshop.productservice.model.entity.CategoryEntity;
@@ -13,12 +12,11 @@ import com.livestockshop.productservice.model.entity.CategoryEntity;
  * @see CategoryEntity
  */
 public interface CategoryRepository extends CrudRepository<CategoryEntity, Long> {
-
+  
   /**
-   * Finds all category names.
+   * Finds all categories.
    * 
-   * @return a {@code List} of category names
+   * @return a {@code List} of all existing categories
    */
-  @Query(name = CategoryEntity.JPQL_FIND_ALL_CATEGORY_NAMES)
-  List<String> findAllCategoryNames();
+  List<CategoryEntity> findAll();
 }

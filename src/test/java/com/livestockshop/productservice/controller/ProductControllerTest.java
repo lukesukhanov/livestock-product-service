@@ -69,7 +69,7 @@ class ProductControllerTest {
   final void getWithPagingAndFiltering_normalReturn() throws Exception {
     Integer page = 0;
     Integer size = 10;
-    String category = "Овцы";
+    Long categoryId = 1L;
     Double minPrice = 0d;
     Double maxPrice = 10000d;
     Pageable pageable = PageRequest.of(page, size, Sort.by(ProductEntity_.ID));
@@ -82,13 +82,13 @@ class ProductControllerTest {
         "last", products.isLast(),
         "totalElements", products.getTotalElements(),
         "totalPages", products.getTotalPages());
-    when(this.productService.getWithPagingAndFiltering(page, size, category, minPrice, maxPrice))
+    when(this.productService.getWithPagingAndFiltering(page, size, categoryId, minPrice, maxPrice))
         .thenReturn(products);
     this.mockMvc.perform(get("/products")
         .accept(MediaType.APPLICATION_JSON)
         .param("page", page.toString())
         .param("size", size.toString())
-        .param("category", category)
+        .param("category", categoryId.toString())
         .param("minPrice", minPrice.toString())
         .param("maxPrice", maxPrice.toString()))
         .andExpectAll(

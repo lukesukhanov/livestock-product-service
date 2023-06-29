@@ -29,7 +29,7 @@ public class DefaultProductService implements ProductService {
   public Page<ProductEntity> getWithPagingAndFiltering(
       Integer page,
       Integer size,
-      String categoryName,
+      Long categoryId,
       Double minPrice,
       Double maxPrice) {
 
@@ -40,8 +40,8 @@ public class DefaultProductService implements ProductService {
       pageable = Pageable.unpaged();
     }
     Specification<ProductEntity> spec = Specification.where(null);
-    if (categoryName != null) {
-      spec = spec.and(ProductSpecification.byCategoryName(categoryName));
+    if (categoryId != null) {
+      spec = spec.and(ProductSpecification.byCategoryId(categoryId));
     }
     if (minPrice != null) {
       spec = spec.and(ProductSpecification.withPriceGreaterThanOrEqualTo(minPrice));
