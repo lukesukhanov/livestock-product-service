@@ -1,14 +1,8 @@
 package com.livestockshop.productservice.model.entity;
 
-import java.util.Map;
-import java.util.Objects;
+import com.livestockshop.productservice.repository.ProductImageRepository;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.livestockshop.productservice.repository.ProductRepository;
-
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -25,30 +20,37 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * A product entity.
+ * A product's image entity.
  * <p>
  * The {@code equals} method should be used for comparisons.
- * The {@code ProductEntity} objects are compared by {@code id}.
- * The {@code ProductEntity} with {@code id = null} is equal only to itself.
+ * The {@code ProductImageEntity} objects are compared by {@code id}.
+ * The {@code ProductImageEntity} with {@code id = null} is equal only to
+ * itself.
  * <p>
  * The {@code hashCode} method always returns the same value.
  * <p>
  * This class is not immutable and is not supposed to be used concurrently.
  * 
- * @see ProductRepository
+ * @see ProductImageRepository
  */
 @Entity
-@Table(name = "PRODUCT")
-@DynamicUpdate
+@Table(name = "PRODUCT_IMAGE")
 @NamedEntityGraph(
-    name = "product.withCategory",
-    attributeNodes = @NamedAttributeNode(value = ProductEntity_.CATEGORY))
+    name = "productImage.withImage",
+    attributeNodes = @NamedAttributeNode(value = ProductImageEntity_.IMAGE))
+@NamedQuery(name = "find_ids_of_images_by_product_id",
+    query = "select id from ProductImageEntity where product.id = :productId")
+@NamedQuery(name = "find_image_by_id",
+    query = "select image from ProductImageEntity where id = :id")
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductEntity {
+public class ProductImageEntity {
 
-  public static final String ENTITY_GRAPH_WITH_CATEGORY = "product.withCategory";
+  public static final String ENTITY_GRAPH_WITH_IMAGE = "productImage.withImage";
+
+  public static final String JPQL_FIND_IDS_OF_IMAGES_BY_PRODUCT_ID = "find_ids_of_images_by_product_id";
+  public static final String JPQL_FIND_IMAGE_BY_ID = "find_image_by_id";
 
   @Id
   @GeneratedValue(generator = "common_id_seq")
@@ -56,25 +58,13 @@ public class ProductEntity {
   @Column(name = "ID", updatable = false)
   private Long id;
 
-  @Column(name = "PRODUCT_NAME")
-  private String productName;
-
-  @Column(name = "DESCRIPTION")
-  private String description;
-
-  @Column(name = "QUANTITY")
-  private Integer quantity;
-
-  @Column(name = "PRICE")
-  private Double price;
-
-  @Column(name = "CURRENCY")
-  private String currency;
+  @Basic(fetch = FetchType.LAZY)
+  @Column(name = "IMAGE")
+  private byte[] image;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "CATEGORY_ID")
-  @JsonIgnore
-  private CategoryEntity category;
+  @JoinColumn(name = "PRODUCT_ID")
+  private ProductEntity product;
 
   @Override
   public int hashCode() {
@@ -86,15 +76,10 @@ public class ProductEntity {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof ProductEntity)) {
+    if (!(o instanceof ProductImageEntity)) {
       return false;
     }
-    ProductEntity other = (ProductEntity) o;
+    ProductImageEntity other = (ProductImageEntity) o;
     return this.id != null && this.id.equals(other.getId());
-  }
-
-  @JsonAnyGetter
-  private Map<String, String> addJsonProperties() {
-    return Map.of("category", Objects.toString(this.category.getCategoryName()));
   }
 }

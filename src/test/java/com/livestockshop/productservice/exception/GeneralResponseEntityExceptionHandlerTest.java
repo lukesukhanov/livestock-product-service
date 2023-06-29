@@ -1,5 +1,6 @@
-package com.livestockshop.productservice.exception.handler;
+package com.livestockshop.productservice.exception;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -10,17 +11,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.livestockshop.productservice.LivestockShopProductServiceApplication;
+import com.livestockshop.productservice.controller.ProductImageController;
 
 @SpringBootTest(classes = LivestockShopProductServiceApplication.class)
-@DisplayName("ProductResponseEntityExceptionHandler")
+@DisplayName("GeneralResponseEntityExceptionHandler")
 @Tag("exceptionHandler")
-@Tag("product")
+@Tag("controller")
 @AutoConfigureMockMvc
-class ProductResponseEntityExceptionHandlerTest {
+class GeneralResponseEntityExceptionHandlerTest {
+
+  @MockBean
+  private ProductImageController productImageController;
 
   @Autowired
   private MockMvc mockMvc;
@@ -47,7 +53,7 @@ class ProductResponseEntityExceptionHandlerTest {
 
   @Test
   @DisplayName("handleTypeMismatch(...) - request parameter has invalid type")
-  final void handleTypeMismatch_invalidRequestParameter() throws Exception {
+  final void handleTypeMismatch_requestParameterHasInvalidType() throws Exception {
     Double page = 1.1;
     Integer size = 10;
     String category = "Овцы";
@@ -63,5 +69,17 @@ class ProductResponseEntityExceptionHandlerTest {
         .andExpectAll(
             status().isBadRequest(),
             content().contentType(MediaType.APPLICATION_PROBLEM_JSON));
+  }
+
+  @Test
+  @DisplayName("handleNotFoundException(...) - resource not found")
+  final void handleNotFoundException_resourceNotFound() throws Exception {
+    Long id = 1L;
+    when(this.productImageController.getImageById(id))
+        .thenThrow(new ProductImageNotFoundException(id));
+    this.mockMvc.perform(get("/productImages/" + id)
+        .accept(MediaType.IMAGE_JPEG))
+        .andExpectAll(
+            status().isNotFound());
   }
 }

@@ -19,18 +19,17 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Provides the endpoints for accessing products.<br />
+ * Provides the endpoints for accessing products.
  * <p>
  * The endpoints {@code /products/**} are used.
  * <p>
  * The JSON format is used for the response body.
  * 
- * @see ProductEntity
  * @see ProductService
+ * @see ProductExceptionHandler
  */
 @RestController
-@RequestMapping(path = "/products",
-    produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/products")
 @Validated
 @RequiredArgsConstructor
 public class ProductController {
@@ -41,6 +40,18 @@ public class ProductController {
    * Finds products using paging and filtering.
    * <p>
    * Serves the {@code GET} requests for the {@code /products} endpoint.
+   * <p>
+   * Request parameters:
+   * <ul>
+   * <li>page - the required page, type: integer, greater than or equal to 0,
+   * not required</li>
+   * <li>size - the page size, type: integer, positive, not required</li>
+   * <li>category - the product category, type: string, not required</li>
+   * <li>minPrice - the minimal price of a product, type: double, not
+   * required</li>
+   * <li>maxPrice - the maximal price of a product, type: double, not
+   * required</li>
+   * </ul>
    * <p>
    * <b>Usage example</b>
    * <p>
@@ -55,11 +66,27 @@ public class ProductController {
    * totalPages: 2, content: [{id: 1, productName: "Овцы бараны", description:
    * "Продаю баранов и овец", quantity: 57, price: 9500, currency: "RUB",
    * category: "Овцы"}, ...]}
+   * <p>
+   * <i>Response in case of invalid request parameters</i>
+   * <p>
+   * Status: 400<br />
+   * Body: {type: "/probs/invalidRequestParameters", title: "Invalid request
+   * parameters", status: 400, invalid-params: [{"name": "page", "reason": "Page
+   * ordinal must be greater than or equal to 0"}]}
+   * <p>
+   * <i>Response in case request parameter has invalid type</i>
+   * <p>
+   * Status: 400<br />
+   * Body: {type: "/probs/requestPropertyTypeMismatch", title: "Request property
+   * type mismatch", status: 400, detail: "Failed to convert value of type
+   * 'java.lang.String' to required type 'java.lang.Integer'; For input string:
+   * \"1.1\"", property: "page", requiredType: "java.lang.Integer", value:
+   * "1.1"}
    * 
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
    *         containing all the players found using paging and filtering
    */
-  @GetMapping
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> getWithPagingAndFiltering(
       @RequestParam(name = "page", required = false)
       @PositiveOrZero(message = "Page ordinal must be greater than or equal to 0") Integer page,

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * A product category entity.<br />
+ * A product category entity.
  * <p>
  * The {@code equals} method should be used for comparisons.
  * The {@code CategoryEntity} objects are compared by {@code id}.
