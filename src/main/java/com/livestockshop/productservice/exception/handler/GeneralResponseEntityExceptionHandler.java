@@ -15,22 +15,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.livestockshop.productservice.controller.ProductController;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Handles exceptions related to products.
- * <p>
- * This advice works with the {@link ProductController}.
- * 
- * @see ProductController
+ * Handles general controller exceptions.
  */
-@ControllerAdvice(assignableTypes = ProductController.class)
+@ControllerAdvice
 @Slf4j
-public class ProductResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class GeneralResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
   /**
    * Handles the {@code ConstraintViolationException} which may be thrown in

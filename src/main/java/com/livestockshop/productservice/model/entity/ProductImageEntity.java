@@ -2,6 +2,8 @@ package com.livestockshop.productservice.model.entity;
 
 import java.sql.Blob;
 
+import com.livestockshop.productservice.repository.ProductImageRepository;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +15,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -38,12 +41,16 @@ import lombok.Setter;
 @NamedEntityGraph(
     name = "productImage.withImage",
     attributeNodes = @NamedAttributeNode(value = ProductImageEntity_.IMAGE))
+@NamedQuery(name = "find_ids_of_images_by_product_id",
+    query = "select id from ProductImageEntity where product.id = :productId")
 @NoArgsConstructor
 @Getter
 @Setter
 public class ProductImageEntity {
 
   public static final String ENTITY_GRAPH_WITH_IMAGE = "productImage.withImage";
+
+  public static final String JPQL_FIND_IDS_OF_IMAGES_BY_PRODUCT_ID = "find_ids_of_images_by_product_id";
 
   @Id
   @GeneratedValue(generator = "common_id_seq")

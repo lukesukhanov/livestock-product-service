@@ -16,11 +16,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.livestockshop.productservice.LivestockShopProductServiceApplication;
 
 @SpringBootTest(classes = LivestockShopProductServiceApplication.class)
-@DisplayName("ProductResponseEntityExceptionHandler")
+@DisplayName("GeneralResponseEntityExceptionHandler")
 @Tag("exceptionHandler")
-@Tag("product")
+@Tag("controller")
 @AutoConfigureMockMvc
-class ProductResponseEntityExceptionHandlerTest {
+class GeneralResponseEntityExceptionHandlerTest {
 
   @Autowired
   private MockMvc mockMvc;
