@@ -91,7 +91,9 @@ components:
       type: object
       properties:
         content:
-          $ref: "#/components/schemas/Product"
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
         numberOfElements:
           type: integer
           format: int32
