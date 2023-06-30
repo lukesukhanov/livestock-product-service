@@ -31,7 +31,7 @@ paths:
           type: integer
           format: int32
       - in: query
-        name: category
+        name: categoryId
         description: The id of the product category
         required: false
         schema:
