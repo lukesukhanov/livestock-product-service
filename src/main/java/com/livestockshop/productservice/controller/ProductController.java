@@ -46,7 +46,7 @@ public class ProductController {
    * <li>page - the required page, type: integer, greater than or equal to 0,
    * not required</li>
    * <li>size - the page size, type: integer, positive, not required</li>
-   * <li>category - the category id, type: long, not required</li>
+   * <li>categoryId - the category id, type: long, not required</li>
    * <li>minPrice - the minimal price of a product, type: double, not
    * required</li>
    * <li>maxPrice - the maximal price of a product, type: double, not
@@ -57,7 +57,7 @@ public class ProductController {
    * <p>
    * <i>Request</i>
    * <p>
-   * GET /products?page=0?size=5?category=1?minPrice=0?maxPrice=10000
+   * GET /products?page=0?size=5?categoryId=1?minPrice=0?maxPrice=10000
    * <p>
    * <i>Normal response</i>
    * <p>
@@ -94,7 +94,7 @@ public class ProductController {
       @RequestParam(name = "size", required = false)
       @Positive(message = "Page size must be positive") Integer size,
 
-      @RequestParam(name = "category", required = false) Long categoryId,
+      @RequestParam(name = "categoryId", required = false) Long categoryId,
 
       @RequestParam(name = "minPrice", required = false)
       @PositiveOrZero(message = "Minimal price must be greater than or equal to 0") Double minPrice,
