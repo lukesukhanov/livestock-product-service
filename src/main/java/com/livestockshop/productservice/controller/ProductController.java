@@ -96,11 +96,9 @@ public class ProductController {
 
       @RequestParam(name = "categoryId", required = false) Long categoryId,
 
-      @RequestParam(name = "minPrice", required = false)
-      @PositiveOrZero(message = "Minimal price must be greater than or equal to 0") Double minPrice,
+      @RequestParam(name = "minPrice", required = false) Double minPrice,
 
-      @RequestParam(name = "maxPrice", required = false)
-      @Positive(message = "Maximal price must be positive") Double maxPrice) {
+      @RequestParam(name = "maxPrice", required = false) Double maxPrice) {
 
     Page<ProductEntity> products = this.productService.getWithPagingAndFiltering(page, size,
         categoryId, minPrice, maxPrice);
