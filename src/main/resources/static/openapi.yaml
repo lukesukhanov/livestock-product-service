@@ -31,6 +31,12 @@ paths:
           type: integer
           format: int32
       - in: query
+        name: search
+        description: The search pattern
+        required: false
+        schema:
+          type: string
+      - in: query
         name: categoryId
         description: The id of the product category
         required: false

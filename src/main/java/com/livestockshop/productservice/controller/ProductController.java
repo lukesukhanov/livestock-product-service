@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.livestockshop.productservice.exception.GeneralResponseEntityExceptionHandler;
 import com.livestockshop.productservice.model.entity.ProductEntity;
 import com.livestockshop.productservice.service.ProductService;
 
@@ -83,6 +84,12 @@ public class ProductController {
    * \"1.1\"", property: "page", requiredType: "java.lang.Integer", value:
    * "1.1"}
    * 
+   * @param page a {@code Integer} representing page ordinal
+   * @param size a {@code Integer} representing page size
+   * @param search a {@code String} with search pattern
+   * @param categoryId a {@code Long} representing id of the product category
+   * @param size a {@code Double} representing minimal product price
+   * @param size a {@code Double} representing maximal product price
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
    *         containing all the players found using paging and filtering
    */
@@ -90,17 +97,14 @@ public class ProductController {
   public ResponseEntity<?> getWithPagingAndFiltering(
       @RequestParam(name = "page", required = false)
       @PositiveOrZero(message = "Page ordinal must be greater than or equal to 0") Integer page,
-
       @RequestParam(name = "size", required = false)
       @Positive(message = "Page size must be positive") Integer size,
-
+      @RequestParam(name = "search", required = false) String search,
       @RequestParam(name = "categoryId", required = false) Long categoryId,
-
       @RequestParam(name = "minPrice", required = false) Double minPrice,
-
       @RequestParam(name = "maxPrice", required = false) Double maxPrice) {
 
-    Page<ProductEntity> products = this.productService.getWithPagingAndFiltering(page, size,
+    Page<ProductEntity> products = this.productService.getWithPagingAndFiltering(page, size, search,
         categoryId, minPrice, maxPrice);
     Map<String, Object> responseBody = Map.of(
         "numberOfElements", products.getNumberOfElements(),

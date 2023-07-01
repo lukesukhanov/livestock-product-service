@@ -49,4 +49,30 @@ public class ProductSpecification {
     return (root, query, builder) -> builder
         .lessThanOrEqualTo(root.get(ProductEntity_.price), maxPrice);
   }
+
+  /**
+   * Filters products with product name matching the given pattern ignoring
+   * case.
+   * 
+   * @param pattern a {@code String} with the pattern for product name
+   * @return a {@code Specification} filtering products with product name
+   *         matching the given pattern ignoring case
+   */
+  public static Specification<ProductEntity> withNameIgnoreCaseLike(String pattern) {
+    return (root, query, builder) -> builder
+        .like(builder.lower(root.get(ProductEntity_.productName)), pattern);
+  }
+
+  /**
+   * Filters products with description matching the given pattern ignoring
+   * case.
+   * 
+   * @param pattern a {@code String} with the pattern for product name
+   * @return a {@code Specification} filtering products with description
+   *         matching the given pattern ignoring case
+   */
+  public static Specification<ProductEntity> withDescriptionIgnoreCaseLike(String pattern) {
+    return (root, query, builder) -> builder
+        .like(builder.lower(root.get(ProductEntity_.description)), pattern);
+  }
 }

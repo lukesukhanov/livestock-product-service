@@ -62,7 +62,7 @@ class DefaultProductServiceTest {
     Specification<ProductEntity> spec = Specification.where(null);
     when(this.productRepository.findAll(spec, pageable))
         .thenReturn(this.existingProductEntities);
-    Page<ProductEntity> result = this.productService.getWithPagingAndFiltering(page, size,
+    Page<ProductEntity> result = this.productService.getWithPagingAndFiltering(page, size, null,
         null, null, null);
     assertEquals(result, this.existingProductEntities);
   }

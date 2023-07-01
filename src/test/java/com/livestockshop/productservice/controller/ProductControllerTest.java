@@ -5,8 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +49,6 @@ class ProductControllerTest {
   private final List<ProductEntity> existingProducts;
 
   {
-    List<ProductEntity> products = new ArrayList<>();
     ProductEntity product1 = new ProductEntity();
     product1.setId(1L);
     product1.setProductName("name1");
@@ -60,8 +57,7 @@ class ProductControllerTest {
     product1.setPrice(1.0);
     product1.setCurrency("RUB");
     product1.setCategory(new CategoryEntity());
-    Collections.addAll(products, product1);
-    this.existingProducts = Collections.unmodifiableList(products);
+    this.existingProducts = List.of(product1);
   }
 
   @Test
@@ -69,6 +65,7 @@ class ProductControllerTest {
   final void getWithPagingAndFiltering_normalReturn() throws Exception {
     Integer page = 0;
     Integer size = 10;
+    String search = "search";
     Long categoryId = 1L;
     Double minPrice = 0d;
     Double maxPrice = 10000d;
@@ -82,13 +79,15 @@ class ProductControllerTest {
         "last", products.isLast(),
         "totalElements", products.getTotalElements(),
         "totalPages", products.getTotalPages());
-    when(this.productService.getWithPagingAndFiltering(page, size, categoryId, minPrice, maxPrice))
+    when(this.productService.getWithPagingAndFiltering(page, size, search, categoryId, minPrice,
+        maxPrice))
         .thenReturn(products);
     this.mockMvc.perform(get("/products")
         .accept(MediaType.APPLICATION_JSON)
         .param("page", page.toString())
         .param("size", size.toString())
-        .param("category", categoryId.toString())
+        .param("search", search)
+        .param("categoryId", categoryId.toString())
         .param("minPrice", minPrice.toString())
         .param("maxPrice", maxPrice.toString()))
         .andExpectAll(
