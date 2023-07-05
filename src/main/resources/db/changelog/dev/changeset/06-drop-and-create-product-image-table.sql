@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS product_image CASCADE;
 CREATE TABLE product_image (
 	id bigint NOT NULL PRIMARY KEY DEFAULT nextval('common_id_seq'),
 	image bytea NOT NULL,
-	created_at timestamp with time zone,
-	last_modified_at timestamp with time zone,
+	created_at timestamp with time zone NOT NULL,
+	last_modified_at timestamp with time zone NOT NULL,
 	product_id bigint NOT NULL REFERENCES product(id) ON DELETE CASCADE
 );
 -- rollback DROP TABLE IF EXISTS product_image CASCADE;

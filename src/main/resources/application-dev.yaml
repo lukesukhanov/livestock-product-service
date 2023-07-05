@@ -1,13 +1,15 @@
 server:
   port: 8082
   servlet:
-    context-path: /
     session:
       timeout: 15m
       cookie:
         same-site: Strict
         secure: false
+
 spring:
+  application:
+    name: product-service
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=livestock_shop_dev
@@ -44,8 +46,10 @@ spring:
     liquibase-schema: public
     default-schema: livestock_shop_dev
     drop-first: true
+
 logging:
   config: classpath:logback-dev.xml
+
 springdoc:
   enabled: true
   swagger-ui:

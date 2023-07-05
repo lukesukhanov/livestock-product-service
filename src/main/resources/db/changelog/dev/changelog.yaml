@@ -1,19 +1,19 @@
 databaseChangeLog:
 - include:
-    file: db/changelog/dev/changeset/1-drop-and-create-schema.sql
+    file: db/changelog/dev/changeset/01-create-schema.sql
 - include:
-    file: db/changelog/dev/changeset/2-drop-and-create-id-sequence.sql
+    file: db/changelog/dev/changeset/02-create-id-sequence.sql
 - include:
-    file: db/changelog/dev/changeset/3-drop-and-create-trigger-functions.sql
+    file: db/changelog/dev/changeset/03-create-trigger-functions.sql
 - include:
-    file: db/changelog/dev/changeset/4-drop-and-create-category-table.sql
+    file: db/changelog/dev/changeset/04-drop-and-create-category-table.sql
 - include:
-    file: db/changelog/dev/changeset/5-drop-and-create-product-table.sql
+    file: db/changelog/dev/changeset/05-drop-and-create-product-table.sql
 - include:
-    file: db/changelog/dev/changeset/6-drop-and-create-product-image-table.sql
+    file: db/changelog/dev/changeset/06-drop-and-create-product-image-table.sql
 - include:
-    file: db/changelog/dev/changeset/7-insert-categories.sql
+    file: db/changelog/dev/changeset/07-insert-categories.sql
 - include:
-    file: db/changelog/dev/changeset/8-insert-products.sql
+    file: db/changelog/dev/changeset/08-insert-products.sql
 - include:
-    file: db/changelog/dev/changeset/9-drop-and-create-index-on-category-id-column.sql
+    file: db/changelog/dev/changeset/09-drop-and-create-index-on-category-id-column.sql

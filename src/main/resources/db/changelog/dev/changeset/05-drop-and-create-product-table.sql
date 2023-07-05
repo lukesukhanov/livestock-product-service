@@ -11,8 +11,8 @@ CREATE TABLE product (
 	quantity integer NOT NULL CHECK(quantity >= 0),
 	price numeric NOT NULL CHECK(price > 0),
 	currency varchar(3) NOT NULL,
-	created_at timestamp with time zone,
-	last_modified_at timestamp with time zone,
+	created_at timestamp with time zone NOT NULL,
+	last_modified_at timestamp with time zone NOT NULL,
 	category_id bigint NOT NULL REFERENCES category(id) ON DELETE CASCADE
 );
 -- rollback DROP TABLE IF EXISTS product CASCADE;
