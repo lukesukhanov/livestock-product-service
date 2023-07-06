@@ -58,7 +58,7 @@ public class ProductController {
    * <p>
    * <i>Request</i>
    * <p>
-   * GET /products?page=0?size=5?categoryId=1?minPrice=0?maxPrice=10000
+   * GET /products?page=0&size=5&categoryId=1&minPrice=0&maxPrice=10000
    * <p>
    * <i>Normal response</i>
    * <p>
@@ -91,7 +91,7 @@ public class ProductController {
    * @param size a {@code Double} representing minimal product price
    * @param size a {@code Double} representing maximal product price
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
-   *         containing all the players found using paging and filtering
+   *         containing the products found using paging and filtering
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> getWithPagingAndFiltering(

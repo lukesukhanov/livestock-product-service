@@ -43,9 +43,9 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/dev/changelog.yaml
-    liquibase-schema: public
+    liquibase-schema: livestock_shop_dev_liquibase
     default-schema: livestock_shop_dev
-    drop-first: true
+    drop-first: false
 
 logging:
   config: classpath:logback-dev.xml
