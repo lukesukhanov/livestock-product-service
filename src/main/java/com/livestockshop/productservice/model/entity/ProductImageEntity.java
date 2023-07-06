@@ -62,7 +62,7 @@ public class ProductImageEntity {
   @Column(name = "IMAGE")
   private byte[] image;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "PRODUCT_ID")
   private ProductEntity product;
 
