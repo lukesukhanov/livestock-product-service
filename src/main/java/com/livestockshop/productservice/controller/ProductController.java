@@ -81,12 +81,7 @@ public class ProductController {
    * \"1.1\"", property: "page", requiredType: "java.lang.Integer", value:
    * "1.1"}
    * 
-   * @param page a {@code Integer} representing page ordinal
-   * @param size a {@code Integer} representing page size
-   * @param search a {@code String} with search pattern
-   * @param categoryId a {@code Long} representing id of the product category
-   * @param size a {@code Double} representing minimal product price
-   * @param size a {@code Double} representing maximal product price
+   * @param productFilter a {@code ProductFilter} with product filters
    * @return a {@code ResponseEntity} with the status {@code 200} and the body
    *         containing the products found using paging and filtering
    */
