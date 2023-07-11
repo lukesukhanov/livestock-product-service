@@ -111,34 +111,34 @@ WITH
 	RETURNING id)
 INSERT INTO product_image (product_id, image)
 VALUES ((SELECT * FROM sheep_1_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\1.jpg')),
 		((SELECT * FROM sheep_2_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\2.jpg')),
 		((SELECT * FROM sheep_3_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\3.jpg')),
 		((SELECT * FROM sheep_4_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\4.jpg')),
 		((SELECT * FROM sheep_5_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\5.jpg')),
 		((SELECT * FROM sheep_6_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\6.jpg')),
 		((SELECT * FROM sheep_7_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\7.jpg')),
 		((SELECT * FROM sheep_8_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\8.jpg')),
 		((SELECT * FROM sheep_9_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\9.jpg')),
 		((SELECT * FROM sheep_10_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\sheeps\10.jpg'));
 
 -- Коровы
@@ -251,34 +251,34 @@ WITH
 	RETURNING id)
 INSERT INTO product_image (product_id, image)
 VALUES ((SELECT * FROM cow_1_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\1.jpg')),
 		((SELECT * FROM cow_2_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\2.jpg')),
 		((SELECT * FROM cow_3_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\3.jpg')),
 		((SELECT * FROM cow_4_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\4.jpg')),
 		((SELECT * FROM cow_5_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\5.jpg')),
 		((SELECT * FROM cow_6_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\6.jpg')),
 		((SELECT * FROM cow_7_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\7.jpg')),
 		((SELECT * FROM cow_8_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\8.jpg')),
 		((SELECT * FROM cow_9_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\9.jpg')),
 		((SELECT * FROM cow_10_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\cows\10.jpg'));
 
 -- Свиньи
@@ -371,28 +371,28 @@ WITH
 	RETURNING id)
 INSERT INTO product_image (product_id, image)
 VALUES ((SELECT * FROM pig_1_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\1.jpg')),
 		((SELECT * FROM pig_2_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\2.jpg')),
 		((SELECT * FROM pig_3_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\3.jpg')),
 		((SELECT * FROM pig_4_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\4.jpg')),
 		((SELECT * FROM pig_5_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\5.jpg')),
 		((SELECT * FROM pig_6_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\6.jpg')),
 		((SELECT * FROM pig_7_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\7.jpg')),
 		((SELECT * FROM pig_8_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\pigs\8.jpg'));
 
 -- Лошади
@@ -489,28 +489,28 @@ WITH
 	RETURNING id)
 INSERT INTO product_image (product_id, image)
 VALUES ((SELECT * FROM horse_1_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\1.jpg')),
 		((SELECT * FROM horse_2_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\2.jpg')),
 		((SELECT * FROM horse_3_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\3.jpg')),
 		((SELECT * FROM horse_4_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\4.jpg')),
 		((SELECT * FROM horse_5_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\5.jpg')),
 		((SELECT * FROM horse_6_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\6.jpg')),
 		((SELECT * FROM horse_7_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\7.jpg')),
 		((SELECT * FROM horse_8_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\horses\8.jpg'));
 			
 -- Козы
@@ -597,25 +597,26 @@ WITH
 	RETURNING id)
 INSERT INTO product_image (product_id, image)
 VALUES ((SELECT * FROM goat_1_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\1.jpg')),
 		((SELECT * FROM goat_2_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\2.jpg')),
 		((SELECT * FROM goat_3_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\3.jpg')),
 		((SELECT * FROM goat_4_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\4.jpg')),
 		((SELECT * FROM goat_5_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\5.jpg')),
 		((SELECT * FROM goat_6_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\6.jpg')),
 		((SELECT * FROM goat_7_id), 
-		pg_read_binary_file('C:\dev\projects\livestock-shop\livestock-shop-product-service\src\main\'
+		pg_read_binary_file('C:\dev\projects\livestock\livestock-product-service\src\main\'
 			|| 'resources\db\changelog\dev\static\images\goats\7.jpg'));
 
 -- rollback TRUNCATE product
+-- rollback TRUNCATE product_image

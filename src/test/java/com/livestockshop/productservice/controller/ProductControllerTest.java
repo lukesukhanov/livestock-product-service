@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.livestockshop.productservice.LivestockShopProductServiceApplication;
+import com.livestockshop.productservice.model.dto.ProductFilter;
 import com.livestockshop.productservice.model.entity.CategoryEntity;
 import com.livestockshop.productservice.model.entity.ProductEntity;
 import com.livestockshop.productservice.model.entity.ProductEntity_;
@@ -79,8 +80,8 @@ class ProductControllerTest {
         "last", products.isLast(),
         "totalElements", products.getTotalElements(),
         "totalPages", products.getTotalPages());
-    when(this.productService.getWithPagingAndFiltering(page, size, search, categoryId, minPrice,
-        maxPrice))
+    when(this.productService.getWithPagingAndFiltering(
+        new ProductFilter(page, size, search, categoryId, minPrice, maxPrice)))
         .thenReturn(products);
     this.mockMvc.perform(get("/products")
         .accept(MediaType.APPLICATION_JSON)

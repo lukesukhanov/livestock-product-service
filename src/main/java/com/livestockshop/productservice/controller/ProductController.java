@@ -5,18 +5,16 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.livestockshop.productservice.exception.GeneralResponseEntityExceptionHandler;
+import com.livestockshop.productservice.model.dto.ProductFilter;
 import com.livestockshop.productservice.model.entity.ProductEntity;
 import com.livestockshop.productservice.service.ProductService;
 
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -31,7 +29,6 @@ import lombok.RequiredArgsConstructor;
  */
 @RestController
 @RequestMapping(path = "/products")
-@Validated
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -94,18 +91,9 @@ public class ProductController {
    *         containing the products found using paging and filtering
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<?> getWithPagingAndFiltering(
-      @RequestParam(name = "page", required = false)
-      @PositiveOrZero(message = "Page ordinal must be greater than or equal to 0") Integer page,
-      @RequestParam(name = "size", required = false)
-      @Positive(message = "Page size must be positive") Integer size,
-      @RequestParam(name = "search", required = false) String search,
-      @RequestParam(name = "categoryId", required = false) Long categoryId,
-      @RequestParam(name = "minPrice", required = false) Double minPrice,
-      @RequestParam(name = "maxPrice", required = false) Double maxPrice) {
+  public ResponseEntity<?> getWithPagingAndFiltering(@Valid ProductFilter productFilter) {
 
-    Page<ProductEntity> products = this.productService.getWithPagingAndFiltering(page, size, search,
-        categoryId, minPrice, maxPrice);
+    Page<ProductEntity> products = this.productService.getWithPagingAndFiltering(productFilter);
     Map<String, Object> responseBody = Map.of(
         "numberOfElements", products.getNumberOfElements(),
         "first", products.isFirst(),

@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.livestockshop.productservice.model.dto.ProductFilter;
 import com.livestockshop.productservice.model.entity.ProductEntity;
 import com.livestockshop.productservice.model.entity.ProductEntity_;
 import com.livestockshop.productservice.repository.ProductRepository;
@@ -31,33 +32,29 @@ public class DefaultProductService implements ProductService {
 
   @Transactional(readOnly = true)
   @Override
-  public Page<ProductEntity> getWithPagingAndFiltering(
-      Integer page,
-      Integer size,
-      String search,
-      Long categoryId,
-      Double minPrice,
-      Double maxPrice) {
-
+  public Page<ProductEntity> getWithPagingAndFiltering(ProductFilter productFilter) {
     Pageable pageable;
-    if (page != null && size != null) {
-      pageable = PageRequest.of(page, size, Sort.by(ProductEntity_.ID));
+    if (productFilter.getPage() != null && productFilter.getSize() != null) {
+      pageable = PageRequest.of(
+          productFilter.getPage(),
+          productFilter.getSize(),
+          Sort.by(ProductEntity_.ID));
     } else {
       pageable = Pageable.unpaged();
     }
     Specification<ProductEntity> spec = Specification.where(null);
-    if (search != null) {
-      String pattern = "%" + search.toLowerCase() + "%";
+    if (productFilter.getSearch() != null) {
+      String pattern = "%" + productFilter.getSearch().toLowerCase() + "%";
       spec = spec.and(withNameIgnoreCaseLike(pattern).or(withDescriptionIgnoreCaseLike(pattern)));
     }
-    if (categoryId != null) {
-      spec = spec.and(byCategoryId(categoryId));
+    if (productFilter.getCategoryId() != null) {
+      spec = spec.and(byCategoryId(productFilter.getCategoryId()));
     }
-    if (minPrice != null) {
-      spec = spec.and(withPriceGreaterThanOrEqualTo(minPrice));
+    if (productFilter.getMinPrice() != null) {
+      spec = spec.and(withPriceGreaterThanOrEqualTo(productFilter.getMinPrice()));
     }
-    if (maxPrice != null) {
-      spec = spec.and(withPriceLessThanOrEqualTo(maxPrice));
+    if (productFilter.getMaxPrice() != null) {
+      spec = spec.and(withPriceLessThanOrEqualTo(productFilter.getMaxPrice()));
     }
     return this.productRepository.findAll(spec, pageable);
   }

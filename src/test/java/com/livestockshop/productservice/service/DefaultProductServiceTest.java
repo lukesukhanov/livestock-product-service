@@ -21,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.livestockshop.productservice.LivestockShopProductServiceApplication;
+import com.livestockshop.productservice.model.dto.ProductFilter;
 import com.livestockshop.productservice.model.entity.ProductEntity;
 import com.livestockshop.productservice.model.entity.ProductEntity_;
 import com.livestockshop.productservice.repository.ProductRepository;
@@ -62,8 +63,8 @@ class DefaultProductServiceTest {
     Specification<ProductEntity> spec = Specification.where(null);
     when(this.productRepository.findAll(spec, pageable))
         .thenReturn(this.existingProductEntities);
-    Page<ProductEntity> result = this.productService.getWithPagingAndFiltering(page, size, null,
-        null, null, null);
+    Page<ProductEntity> result = this.productService
+        .getWithPagingAndFiltering(new ProductFilter(page, size, null, null, null, null));
     assertEquals(result, this.existingProductEntities);
   }
 }
