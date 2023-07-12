@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -92,5 +93,27 @@ public class GeneralResponseEntityExceptionHandler extends ResponseEntityExcepti
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_PROBLEM_JSON);
     return handleExceptionInternal(e, responseBody, headers, HttpStatus.NOT_FOUND, request);
+  }
+  
+  /**
+   * Handles the {@code DataIntegrityViolationException} which may be thrown in
+   * case of duplicating email and so on.
+   * 
+   * @param e the catched {@code DataIntegrityViolationException}
+   * @param request the current {@code WebRequest}
+   * @return a {@code ResponseEntity} with the problem details
+   */
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  private ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException e,
+      WebRequest request) {
+    log.debug("Handling {}", e.toString());
+    Map<String, ?> responseBody = Map.of(
+        "type", request.getContextPath()
+            + "/probs/dataIntegrityViolation",
+        "title", e.getMessage(),
+        "status", "400");
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_PROBLEM_JSON);
+    return handleExceptionInternal(e, responseBody, headers, HttpStatus.BAD_REQUEST, request);
   }
 }
