@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Product service
-  description: Product service for the 'Livestock shop' project.
+  description: Product service for the 'Livestock' project.
   contact:
     name: Luke Sukhanov
     email: lukesukhanov@gmail.com
