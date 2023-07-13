@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Application's entry point.
  */
 @SpringBootApplication
-public class LivestockShopProductServiceApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LivestockShopProductServiceApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

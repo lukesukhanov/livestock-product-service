@@ -1,11 +1,5 @@
 server:
   port: 8082
-  servlet:
-    session:
-      timeout: 15m
-      cookie:
-        same-site: Strict
-        secure: false
 
 spring:
   application:

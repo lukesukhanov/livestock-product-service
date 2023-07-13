@@ -15,10 +15,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.livestock.productservice.LivestockShopProductServiceApplication;
+import com.livestock.productservice.Application;
 import com.livestock.productservice.controller.ProductImageController;
 
-@SpringBootTest(classes = LivestockShopProductServiceApplication.class)
+@SpringBootTest(classes = Application.class)
 @DisplayName("GeneralResponseEntityExceptionHandler")
 @Tag("exceptionHandler")
 @Tag("controller")

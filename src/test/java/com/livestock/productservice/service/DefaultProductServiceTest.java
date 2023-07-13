@@ -20,13 +20,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.livestock.productservice.LivestockShopProductServiceApplication;
+import com.livestock.productservice.Application;
 import com.livestock.productservice.model.dto.ProductFilter;
 import com.livestock.productservice.model.entity.ProductEntity;
 import com.livestock.productservice.model.entity.ProductEntity_;
 import com.livestock.productservice.repository.ProductRepository;
 
-@SpringBootTest(classes = LivestockShopProductServiceApplication.class)
+@SpringBootTest(classes = Application.class)
 @DisplayName("DefaultProductService")
 @Tag("service")
 @Tag("product")

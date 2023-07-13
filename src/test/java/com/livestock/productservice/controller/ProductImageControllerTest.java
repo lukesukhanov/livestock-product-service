@@ -21,10 +21,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.livestock.productservice.LivestockShopProductServiceApplication;
+import com.livestock.productservice.Application;
 import com.livestock.productservice.service.ProductImageService;
 
-@SpringBootTest(classes = LivestockShopProductServiceApplication.class)
+@SpringBootTest(classes = Application.class)
 @DisplayName("ProductImageController")
 @Tag("controller")
 @Tag("productImage")

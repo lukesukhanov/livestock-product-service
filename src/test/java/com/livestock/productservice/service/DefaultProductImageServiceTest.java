@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.livestock.productservice.LivestockShopProductServiceApplication;
+import com.livestock.productservice.Application;
 import com.livestock.productservice.repository.ProductImageRepository;
 
-@SpringBootTest(classes = LivestockShopProductServiceApplication.class)
+@SpringBootTest(classes = Application.class)
 @DisplayName("DefaultProductImageService")
 @Tag("service")
 @Tag("productImage")

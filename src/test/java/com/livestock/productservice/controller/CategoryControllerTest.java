@@ -18,11 +18,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.livestock.productservice.LivestockShopProductServiceApplication;
+import com.livestock.productservice.Application;
 import com.livestock.productservice.model.entity.CategoryEntity;
 import com.livestock.productservice.service.CategoryService;
 
-@SpringBootTest(classes = LivestockShopProductServiceApplication.class)
+@SpringBootTest(classes = Application.class)
 @DisplayName("CategoryController")
 @Tag("controller")
 @Tag("category")
