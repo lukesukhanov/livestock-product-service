@@ -1,6 +1,6 @@
 -- changeset lukesukhanov:3
 
-SET search_path TO livestock_dev;
+SET search_path TO livestock_stage;
 
 -- Trigger function for synchronizing 'created_at' column during INSERT
 CREATE OR REPLACE FUNCTION sync_insert_created_at_column() RETURNS trigger AS

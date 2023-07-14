@@ -1,6 +1,6 @@
 -- changeset lukesukhanov:8
 
-SET search_path TO livestock_dev;
+SET search_path TO livestock_stage;
 
 -- Овцы
 WITH 

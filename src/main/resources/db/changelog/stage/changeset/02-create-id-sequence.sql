@@ -1,6 +1,6 @@
 -- changeset lukesukhanov:2
 
-SET search_path TO livestock_dev;
+SET search_path TO livestock_stage;
 
 -- Single sequence for all 'id' columns
 CREATE SEQUENCE IF NOT EXISTS common_id_seq

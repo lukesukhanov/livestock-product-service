@@ -1,6 +1,6 @@
 -- changeset lukesukhanov:7
 
-SET search_path TO livestock_dev;
+SET search_path TO livestock_stage;
 
 INSERT INTO category (category_name)
 	VALUES ('Овцы'),

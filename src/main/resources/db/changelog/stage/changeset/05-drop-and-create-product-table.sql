@@ -1,6 +1,6 @@
 -- changeset lukesukhanov:5
 
-SET search_path TO livestock_dev;
+SET search_path TO livestock_stage;
 
 -- 'product' table
 DROP TABLE IF EXISTS product CASCADE;
