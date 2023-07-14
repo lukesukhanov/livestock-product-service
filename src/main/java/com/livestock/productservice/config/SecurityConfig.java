@@ -2,6 +2,7 @@ package com.livestock.productservice.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +16,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class SecurityConfig {
 
+  @Value("${app.security.cors-origins}")
+  private String[] corsOrigins;
+  
   @Bean
   SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
     return http
@@ -42,7 +46,7 @@ public class SecurityConfig {
   @Bean
   CorsConfigurationSource defaultCorsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+    configuration.setAllowedOrigins(List.of(this.corsOrigins));
     configuration.setAllowedMethods(List.of(HttpMethod.GET.toString()));
     configuration.setAllowedHeaders(List.of(HttpHeaders.ACCEPT));
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
