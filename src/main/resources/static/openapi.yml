@@ -8,56 +8,56 @@ info:
     url: https://github.com/lukesukhanov
   version: '1.0'
 servers:
-- url: http://localhost:8765
-- url: http://localhost:8082
+  - url: http://localhost:8765
+  - url: http://localhost:8082
 paths:
   /products:
     get:
       tags:
-      - Products
+        - Products
       summary: Get products using paging and filtering
       parameters:
-      - in: query
-        name: page
-        description: The required page
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - in: query
-        name: size
-        description: The page size
-        required: false
-        schema:
-          type: integer
-          format: int32
-      - in: query
-        name: search
-        description: The search pattern
-        required: false
-        schema:
-          type: string
-      - in: query
-        name: categoryId
-        description: The id of the product category
-        required: false
-        schema:
-          type: integer
-          format: int64
-      - in: query
-        name: minPrice
-        description: The minimal price of a product
-        required: false
-        schema:
-          type: number
-          format: double
-      - in: query
-        name: maxPrice
-        description: The maximal price of a product
-        required: false
-        schema:
-          type: number
-          format: double
+        - in: query
+          name: page
+          description: The required page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: size
+          description: The page size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: search
+          description: The search pattern
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: categoryId
+          description: The id of the product category
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: minPrice
+          description: The minimal price of a product
+          required: false
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: maxPrice
+          description: The maximal price of a product
+          required: false
+          schema:
+            type: number
+            format: double
       responses:
         200:
           description: Normal response
@@ -74,16 +74,16 @@ paths:
   /productImages:
     get:
       tags:
-      - Product images
+        - Product images
       summary: Get ids of the images related to the required product
       parameters:
-      - in: query
-        name: productId
-        description: The product's id
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - in: query
+          name: productId
+          description: The product's id
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
           description: Normal response
@@ -100,16 +100,16 @@ paths:
   /productImages/{id}:
     get:
       tags:
-      - Product images
+        - Product images
       summary: Finds an image by id
       parameters:
-      - in: path
-        name: id
-        description: Id of the image
-        required: true
-        schema:
-          type: integer
-          format: int64
+        - in: path
+          name: id
+          description: Id of the image
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         200:
           description: Normal response
@@ -134,7 +134,7 @@ paths:
   /categories:
     get:
       tags:
-      - Product categories
+        - Product categories
       summary: Finds all product categories
       responses:
         200:
@@ -208,9 +208,9 @@ components:
             type: integer
             format: int64
           example:
-          - 1
-          - 2
-          - 3
+            - 1
+            - 2
+            - 3
     ProductCategory:
       type: object
       properties:
