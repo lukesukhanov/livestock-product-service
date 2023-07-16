@@ -1,0 +1,289 @@
+openapi: 3.0.3
+info:
+  title: Product service
+  description: Product service for the 'Livestock' project.
+  contact:
+    name: Luke Sukhanov
+    email: lukesukhanov@gmail.com
+    url: https://github.com/lukesukhanov
+  version: '1.0'
+servers:
+  - url: http://localhost:8765
+  - url: http://localhost:8082
+paths:
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get products using paging and filtering
+      parameters:
+        - in: query
+          name: page
+          description: The required page
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: size
+          description: The page size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: search
+          description: The search pattern
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: categoryId
+          description: The id of the product category
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: minPrice
+          description: The minimal price of a product
+          required: false
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: maxPrice
+          description: The maximal price of a product
+          required: false
+          schema:
+            type: number
+            format: double
+      responses:
+        200:
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsPage'
+        400:
+          description: Response in case of invalid request parameters
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestParametersProblem'
+  /productImages:
+    get:
+      tags:
+        - Product images
+      summary: Get ids of the images related to the required product
+      parameters:
+        - in: query
+          name: productId
+          description: The product's id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdsOfImagesForOneProduct'
+        400:
+          description: Response in case request parameter has invalid type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/RequestParameterHasInvalidTypeProblem'
+  /productImages/{id}:
+    get:
+      tags:
+        - Product images
+      summary: Finds an image by id
+      parameters:
+        - in: path
+          name: id
+          description: Id of the image
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Normal response
+          content:
+            image/jpeg:
+              schema:
+                type: array
+                items:
+                  type: integer
+        400:
+          description: Response in case the path variable has invalid type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/RequestParameterHasInvalidTypeProblem'
+        404:
+          description: Response in case an image wasn't found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProductImageNotFoundProblem'
+  /categories:
+    get:
+      tags:
+        - Product categories
+      summary: Finds all product categories
+      responses:
+        200:
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductCategory'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        productName:
+          type: string
+          example: Овцы бараны
+        description:
+          type: string
+          example: Продаю баранов и овец
+        quantity:
+          type: integer
+          format: int32
+          example: 57
+        price:
+          type: number
+          format: double
+          example: 9500
+        currency:
+          type: string
+          example: RUB
+        category:
+          type: string
+          example: Овцы
+    ProductsPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        numberOfElements:
+          type: integer
+          format: int32
+          example: 5
+        first:
+          type: boolean
+          example: true
+        last:
+          type: boolean
+          example: false
+        totalElements:
+          type: integer
+          format: int32
+          example: 10
+        totalPages:
+          type: integer
+          format: int32
+          example: 2
+    IdsOfImagesForOneProduct:
+      type: object
+      properties:
+        idsOfImages:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+            - 1
+            - 2
+            - 3
+    ProductCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        categoryName:
+          type: string
+          example: Овцы
+    InvalidRequestParametersProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: /probs/invalidRequestParameters
+        title:
+          type: string
+          example: Invalid request parameters
+        status:
+          type: integer
+          format: int32
+          example: 400
+        invalid-params:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvalidRequestParameter'
+    InvalidRequestParameter:
+      type: object
+      properties:
+        name:
+          type: string
+          example: page
+        reason:
+          type: string
+          example: Page ordinal must be greater than or equal to 0
+    RequestParameterHasInvalidTypeProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: /probs/requestPropertyTypeMismatch
+        title:
+          type: string
+          example: Request property type mismatch
+        status:
+          type: integer
+          format: int32
+          example: 400
+        details:
+          type: string
+          example: |-
+            Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer';
+            For input string: "1.1"
+        property:
+          type: string
+          example: page
+        requiredType:
+          type: string
+          example: java.lang.Integer
+        value:
+          type: string
+          example: 1.1
+    ProductImageNotFoundProblem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: /probs/resourceNotFound
+        title:
+          type: string
+          example: Can't find a product image with id 1
+        status:
+          type: integer
+          format: int32
+          example: 404
