@@ -101,7 +101,7 @@ paths:
     get:
       tags:
         - Product images
-      summary: Finds an image by id
+      summary: Get an image by id
       parameters:
         - in: path
           name: id
@@ -135,7 +135,7 @@ paths:
     get:
       tags:
         - Product categories
-      summary: Finds all product categories
+      summary: Get all product categories
       responses:
         200:
           description: Normal response
