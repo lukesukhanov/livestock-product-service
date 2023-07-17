@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
  * <p>
  * The endpoints {@code /productImages/**} are used.
  * <p>
- * The JSON format is used for the response body.
+ * The JSON format and raw bytes formats are used for the response body.
  * 
  * @see ProductImageService
  * @see GeneralResponseEntityExceptionHandler
