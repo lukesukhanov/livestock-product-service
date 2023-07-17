@@ -16,7 +16,7 @@ Now you can find Swagger docs on localhost:8082/swagger-ui/index.html.
 <ul>
   <li>You can get all existing product categories.</li>
   <li>You can get products using paging and filtering.</li>
-  <li>You can get ids of the product images related to the one product.</li>
+  <li>You can get ids of the product images related to one product.</li>
   <li>You can get the product image by id.</li>
 </ul>
 
